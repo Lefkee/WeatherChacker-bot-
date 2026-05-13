@@ -1,11 +1,23 @@
 ##
+##
 ## A new commit will be made when the project is free of errors.
 ## The project progress steps will be as shown below.
 ##
-## V1 : Country and city input
-## V2 : Automatic city detection
-## V3 : Terminal colors
-## V4 : 5 day forecast
-## V5 : GUİ
+##  V1 : Country and city input
+##  
+##  V2 : Automatic city detection
 ##
+##  V3 : Terminal colors (+)
 ##
+##  V4 : 5 day forecast
+##
+##  V5 : GUİ
+##
+##  V6 : Gadget
+##
+## The system shown above will be followed.
+## For suggestions and corrections: lefkee@mail.com
+##
+## If you want to take the code and run it on your own system, you will need to install the imported libraries.
+##
+## 

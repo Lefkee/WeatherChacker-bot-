@@ -1,3 +1,4 @@
+import Location
 
 def Bye1():
-    print("Goodbye my friend :)")
+    print(Fore.RED , "Goodbye my friend :)")
