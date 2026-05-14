@@ -7,11 +7,11 @@
 ##  
 ##  V2 : Automatic city detection
 ##
-##  V3 : Terminal colors (+)
+##  V3 : Terminal colors 
 ##
-##  V4 : 5 day forecast
+##  V4 : GUI ## V4 V5 Swapped (I forgot and made a mistake :D)
 ##
-##  V5 : GUİ
+##  V5 : 5 day forecast
 ##
 ##  V6 : Gadget
 ##
@@ -20,4 +20,4 @@
 ##
 ## If you want to take the code and run it on your own system, you will need to install the imported libraries.
 ##
-## 
+## dffa06ba2836f56f915a170458ca339e

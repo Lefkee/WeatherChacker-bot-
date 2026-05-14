@@ -1,40 +1,72 @@
 import requests
-import weather
 from Location import Locate
-from colorama import Fore, Back, Style, init
-## import customtkinter
+from colorama import Fore, init
+import customtkinter
 
-API_KEY = "Enter your API key here"
-                    ## Enter your API key here.
-def WeatherChacker():
-    while 1:                                               ## API keys can sometimes take up to 10 minutes to process.
-        city = Locate.city                              ## You can obtain your keys from https://home.openweathermap.org/api_keys
+API_KEY = "API KEY" # OpenWeatherMap API Key
 
-        url = (
-            f"https://api.openweathermap.org/data/2.5/weather"
-            f"?q={city}"
-            f"&appid={API_KEY}"
-            f"&units=metric"
-            f"&lang=en" ## To change the language, you need to modify this section to change the output;
-        )               ## to change the remaining parts, you need to modify the parts in the normal rows.
 
-        res = requests.get(url)
+Gui = customtkinter.CTk()
+Gui.geometry("400x250")
+Gui.title("Weather App")
+
+label_1 = customtkinter.CTkLabel(master=Gui,text="Loading...",font=("Courier", 18),text_color="#2ECC71")
+label_1.pack(pady=20)
+
+label_2 = customtkinter.CTkLabel(master=Gui,text="Loading...",font=("Courier", 16),text_color="#2ECC71")
+label_2.pack(pady=10)
+
+label_3 = customtkinter.CTkLabel(master=Gui,text="Loading...",font=("Courier", 16),text_color="#2ECC71")
+label_3.pack(pady=10)
+
+def WeatherChecker():
+    location = Locate.get_location() # Location
+    city = location["city"]
+
+    # Unknown
+    if city == "Unknown_City":
+        print(Fore.RED + "Location could not be found.")
+        label_1.configure(text="Location not found")
+
+        label_2.configure(text="")
+
+        label_3.configure(text="")
+        Gui.after(10000, WeatherChecker) 
+        return
+    url = (
+        f"https://api.openweathermap.org/data/2.5/weather" 
+        f"?q={city}"   
+        f"&appid={API_KEY}" # API KEY
+        f"&units=metric"
+        f"&lang=en"
+    )
+
+    try:
+        res = requests.get(url, timeout=5)
         data = res.json()
 
-        if city == "0":
-            weather.Bye1() ## While loop output
-            break
-        elif res.status_code != 200:
-            print(Fore,RED , f"Error: {data.get('Error message !!!', 'Unknown city or country !!!')}") ## Error messages are not detailed
+        if res.status_code != 200:
+            error_message = data.get("message","Unknown API error")
+            print(Fore.RED + error_message)
+            label_1.configure(text="API Error")
+            label_2.configure(text=error_message)
+            label_3.configure(text="")
         else:
             fcity = data["name"]
             country = data["sys"]["country"]
             temp = data["main"]["temp"]
             desc = data["weather"][0]["description"]
-            print(Fore.BLUE ,"Found location :", Fore.GREEN , f"{fcity}, {country}")   ## There might be some changes in the city name. The result is correct.
-            print(Fore.BLUE , "Heat :          ",Fore.YELLOW ,f"{temp}°C")          ## You can modify the results section to suit your own language.
-            print(Fore.BLUE , "Weather :       ",Fore.WHITE,f"{desc}")       ## I know I could have done it differently instead of leaving spaces, but to be honest, I was too lazy :D
-            break
-WeatherChacker()
-
-## 
+            print(Fore.BLUE + "Found location : " + Fore.GREEN + f"{fcity}, {country}")
+            print(Fore.BLUE + "Heat : " + Fore.YELLOW + f"{temp}°C")
+            print(Fore.BLUE + "Weather : " +Fore.WHITE + f"{desc}")
+            label_1.configure(text=f"Location : {fcity}, {country}")
+            label_2.configure(text=f"Temperature : {temp}°C")
+            label_3.configure(text=f"Weather : {desc}")
+    except requests.RequestException:
+        print(Fore.RED + "Internet connection error.")
+        label_1.configure(text="Connection Error")
+        label_2.configure(text="Check your internet")
+        label_3.configure(text="")
+    Gui.after(10000, WeatherChecker)
+WeatherChecker()
+Gui.mainloop()
