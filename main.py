@@ -3,7 +3,7 @@ from Location import Locate
 from colorama import Fore, init
 import customtkinter
 
-API_KEY = "547abd997cbf3a8dd030a9577130c70e" # OpenWeatherMap API Key
+API_KEY = "XXX" # OpenWeatherMap API Key
 
 Gui = customtkinter.CTk()
 Gui.geometry("800x600")
