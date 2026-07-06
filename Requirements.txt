@@ -3,3 +3,12 @@ The automatic location finding feature, which will be added in version V2, requi
 If your system is in APIPA mode and hasn't received an IP address, it will operate in V1 mode; you do not need to update.
 
 If you want to take the code and run it on your own system, you will need to install the imported libraries.
+
+"""
+requests
+Location
+colorama
+customtkinter
+"""
+
+You need this only 4 

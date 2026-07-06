@@ -3,11 +3,10 @@ from Location import Locate
 from colorama import Fore, init
 import customtkinter
 
-API_KEY = "API KEY" # OpenWeatherMap API Key
-
+API_KEY = "547abd997cbf3a8dd030a9577130c70e" # OpenWeatherMap API Key
 
 Gui = customtkinter.CTk()
-Gui.geometry("400x250")
+Gui.geometry("800x600")
 Gui.title("Weather App")
 
 label_1 = customtkinter.CTkLabel(master=Gui,text="Loading...",font=("Courier", 18),text_color="#2ECC71")
@@ -69,4 +68,5 @@ def WeatherChecker():
         label_3.configure(text="")
     Gui.after(10000, WeatherChecker)
 WeatherChecker()
+
 Gui.mainloop()
